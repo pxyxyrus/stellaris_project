@@ -1,5 +1,5 @@
 from star import *
-from starpath import *
+from star_path import *
 import numpy as np
 
 

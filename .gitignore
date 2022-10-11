@@ -3,7 +3,10 @@
 **/generate_map_unused.py
 **/generate_map2.py
 **/heap.py
-**/visualize.py
+
+**/greedy_agent.py
+**/README.md
+
 
 triangle/*
 ! triangle/README

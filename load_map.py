@@ -1,4 +1,4 @@
-import starmap
+import star_map
 import star
 
 def load_map(map_name):
@@ -14,7 +14,7 @@ def load_map(map_name):
             strs = line.split()
             star_num, x, y = int(strs[0]), float(strs[1]), float(strs[2])
             stars[star_num] = star.Star(x, y)
-        starMap = starmap.StarMap(stars)
+        starMap = star_map.StarMap(stars)
         for line in f:
             strs = line.split()
             star1, star2, distance = int(strs[0]), int(strs[1]), int(strs[2])
