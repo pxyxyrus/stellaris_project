@@ -5,11 +5,11 @@
 
 # Requirements
 
-## Windows
-[X windows](https://cc.jlab.org/windows/X11onWindows)
+<!-- ## Windows -->
+<!-- [X Window](https://www.x.org/wiki/) -->
 
-## OSX
-[Xquartz](https://www.xquartz.org/)
+<!-- ## OSX -->
+<!-- [Xquartz](https://www.xquartz.org/) -->
 
 
 ## Common
