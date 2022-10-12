@@ -1,21 +1,21 @@
 from star import *
-from star_path import *
+from starpath import *
 import numpy as np
-
+import networkx as nx
 
 class StarMap:
 
-    def __init__(self, stars):
+    def __init__(self, stars: list[Star]):
         self.stars = stars
         self.star_paths = []
-        self.adjacencyMatrix = np.zeros((self.number_of_stars(), self.number_of_stars()))
+        self.adjacency_matrix = np.zeros((self.number_of_stars(), self.number_of_stars()))
         
     def number_of_stars(self):
         return len(self.stars)
 
     def add_star_path(self, star1, star2, distance):
-        if self.adjacencyMatrix[star1][star2] == 0 and self.adjacencyMatrix[star2][star1] == 0:
-            self.adjacencyMatrix[star1][star2] = self.adjacencyMatrix[star2][star1] = distance
+        if self.adjacency_matrix[star1][star2] == 0 and self.adjacency_matrix[star2][star1] == 0:
+            self.adjacency_matrix[star1][star2] = self.adjacency_matrix[star2][star1] = distance
             self.star_paths.append(StarPath([star1, star2], distance))
 
     def get_star_position(self):
@@ -25,9 +25,15 @@ class StarMap:
         return d
 
     def is_connected(self, star1, star2):
-        if self.adjacencyMatrix[star1][star2] == self.adjacencyMatrix[star2][star1]:
-            return self.adjacencyMatrix[star1][star2]
+        if self.adjacency_matrix[star1][star2] == self.adjacency_matrix[star2][star1]:
+            return self.adjacency_matrix[star1][star2]
         return 0
+
+    def is_all_stars_owned(self):
+        for st in self.stars:
+            if not st.owned:
+                False
+        return True
 
 
 

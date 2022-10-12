@@ -4,7 +4,10 @@
 **/generate_map2.py
 **/heap.py
 
-**/greedy_agent.py
+**/agents
+game.py
+
+
 # **/README.md
 
 

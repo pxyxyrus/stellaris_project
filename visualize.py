@@ -5,10 +5,9 @@ from load_map import load_map
 
 
 
-def visualize_graph(adjacency_matrix, pos=None):
+def visualize_graph(star_map, adjacency_matrix, pos=None):
     G = nx.Graph()
 
-    edgeNum = 0
     for i in range(0, adjacency_matrix.shape[0]):
         for j in range(0, i):
             if adjacency_matrix[i][j] == 0:
@@ -16,7 +15,6 @@ def visualize_graph(adjacency_matrix, pos=None):
             else:
                 G.add_edge("{}".format(i), "{}".format(j), weight=adjacency_matrix[i][j])
                 edgeNum += 1
-    print("Number of edges {}".format(edgeNum))
 
 
     # it might not work since there is not guarantee that the adjacency matrix is a planar graph
@@ -48,6 +46,7 @@ def visualize_graph(adjacency_matrix, pos=None):
     plt.axis("off")
     plt.tight_layout()
     plt.show()
+
 
 
 
@@ -85,6 +84,6 @@ def visualize_graph2(G, pos = None):
 
 if __name__ == "__main__":
     map_name = input("type in the map name\n")
-    starMap = load_map(map_name)
-    visualize_graph(starMap.adjacencyMatrix, starMap.get_star_position())
+    star_map = load_map(map_name)
+    visualize_graph(star_map, star_map.adjacency_matrix, star_map.get_star_position())
 
