@@ -2,7 +2,7 @@ from stars import *
 import subprocess
 from pathlib import Path
 import numpy as np
-
+from saveloadmap import MAPS_DIRECTORY, save_map 
 from visualize import visualize_graph
 
 
@@ -14,10 +14,9 @@ def get_random_distance():
 
 
 # this is a function that uses the software "triangle" to create a randomized planar graph
-#  
-def generate_map(map_name: str, star_map: starmap.StarMap):
+def generate_map(map_name: str, star_map: StarMap):
     map_name = map_name.replace(" ", "_")
-    map_dir = "./maps/{0}".format(map_name)
+    map_dir = MAPS_DIRECTORY + "/{0}".format(map_name)
     path_to_file = "{0}/{1}.node".format(map_dir, map_name)
     Path(map_dir).mkdir(parents=True, exist_ok=True)
 
@@ -25,7 +24,6 @@ def generate_map(map_name: str, star_map: starmap.StarMap):
         lines_to_write = ["{0} 2 0 0\n".format(star_map.number_of_stars())]
         index = 1
         for st in star_map.stars:
-            print(st)
             lines_to_write.append("{0}, {1}, {2}\n".format(index, st.x, st.y))
             index += 1
         f.writelines(lines_to_write)
@@ -55,31 +53,16 @@ def generate_map(map_name: str, star_map: starmap.StarMap):
                     edge_added += 1
 
 
-    
-    path_to_file = "{0}/{1}.map".format(map_dir, map_name)  
-    with open(path_to_file, "w") as f:
-        lines_to_write = ["{0}\n".format(star_map.number_of_stars())]
-        index = 0
-        for st in star_map.stars:
-            print(st)
-            lines_to_write.append("{0} {1} {2}\n".format(index, st.x, st.y))
-            index += 1
-        
-        for stp in star_map.star_paths:
-            lines_to_write.append("{0} {1} {2}\n".format(stp.stars[0], stp.stars[1], stp.distance))
-
-        f.writelines(lines_to_write)
-
+    save_map(star_map, map_dir, map_name)
 
     
 
 if __name__ == "__main__":
     # passes in number of vertices for the sqaure shape map
     map_name = input("type in a name for the map\n")
-    star_map = starmap.SquareStarMap(10)
-    print(star_map.number_of_stars())
+    star_map = SquareStarMap(10)
     generate_map(map_name, star_map)
-    visualize_graph(star_map, star_map.adjacency_matrix, star_map.get_star_position())
+    visualize_graph(star_map, star_map.get_star_position())
 
 
 

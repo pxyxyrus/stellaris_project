@@ -1,3 +1,3 @@
-import star
-import starmap
-import starmap
+from .star import *
+from .starpath import *
+from .starmap import * 
