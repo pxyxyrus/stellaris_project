@@ -12,27 +12,32 @@ from stars.starmap import StarMap
 def visualize_graph(star_map: StarMap, pos=None):
     G = nx.Graph()
 
+    owners = []
     for stp in star_map.star_paths:
         G.add_edge(stp.stars[0].index, stp.stars[1].index, weight=stp.distance, owner=stp.owner)
+        if stp.owner is not None and stp.owner not in owners:
+            owners.append(stp.owner)
         
     for st in star_map.stars:
         G.add_node(st.index, owner=st.owner)
+        if st.owner is not None and st.owner not in owners:
+            owners.append(st.owner)
 
+    owners.sort()
 
     # it might not work since there is not guarantee that the adjacency matrix is a planar graph
     if pos is None:
         pos = nx.planar_layout(G)
-    
 
     edge_owned_groups = []
-
     # print(G.edges(data=True))
-    for i in range(0, 20):
-        edges_owned = [(u, v) for (u, v, d) in G.edges(data=True) if d["owner"] == i]
-        if len(edges_owned) > 0:
-            edge_owned_groups.append(edges_owned)
+    for owner in owners:
+        edges_owned = [(u, v) for (u, v, d) in G.edges(data=True) if d["owner"] == owner]
+        edge_owned_groups.append(edges_owned)
 
-    num_of_colors = len(edge_owned_groups)
+    num_of_colors = len(owners)
+
+    # add list of edges where owner is None 
     edges_owned_by_none = [(u, v) for (u, v, d) in G.edges(data=True) if d["owner"] == None]
     edge_owned_groups.insert(0, edges_owned_by_none)
 
@@ -40,8 +45,10 @@ def visualize_graph(star_map: StarMap, pos=None):
     cNorm  = colors.Normalize(vmin=0, vmax=num_of_colors - 1)
     scalarMap = mplcm.ScalarMappable(norm=cNorm, cmap=cm)
     colors_list = [scalarMap.to_rgba(i) for i in range(num_of_colors)]
+
+    # Color None (black) is always the first
     colors_list.insert(0, (0.1, 0.1, 0.1, 1))
-    node_color_list = [colors_list[d["owner"] + 1] for (n, d) in G.nodes(data=True)]
+    node_color_list = [colors_list[d["owner"] + 1] if d["owner"] is not None else (0, 0, 0, 1) for (n, d) in G.nodes(data=True)]
 
     
 
