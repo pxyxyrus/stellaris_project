@@ -56,10 +56,10 @@ class StupidAgent(Agent):
     def get_next_edge(self) -> starpath.StarPath:
         for i in range(0, len(self.visited)):
             if self.visited[i]:
-                for j in range(0, self.star_map.adjacency_matrix.shape[0]):
+                for j in range(0, len(self.visited)):
                     if not self.visited[j]:
                         distance = self.star_map.is_connected(i, j)
-                        if distance != 0 and not self.star_map.star_path_dict[i][j].owner:
+                        if distance != 0 and self.star_map.star_path_dict[i][j].owner is None and self.star_map.stars[j].owner is None:
                             return self.star_map.star_path_dict[i][j]
 
 

@@ -14,8 +14,6 @@ def visualize_graph(star_map: StarMap, pos=None):
 
     for stp in star_map.star_paths:
         G.add_edge(stp.stars[0].index, stp.stars[1].index, weight=stp.distance, owner=stp.owner)
-        if stp.owner != None:
-            print(stp.stars[0].index, stp.stars[1].index, stp.distance, stp.owner)
         
     for st in star_map.stars:
         G.add_node(st.index, owner=st.owner)
@@ -30,22 +28,22 @@ def visualize_graph(star_map: StarMap, pos=None):
 
     # print(G.edges(data=True))
     for i in range(0, 20):
-        edges_owned = [(u, v) for (u, v, o) in G.edges(data=True) if o["owner"] == i]
+        edges_owned = [(u, v) for (u, v, d) in G.edges(data=True) if d["owner"] == i]
         if len(edges_owned) > 0:
             edge_owned_groups.append(edges_owned)
 
-    edges_owned_by_none = [(u, v) for (u, v, o) in G.edges(data=True) if o["owner"] == None]
-    if len(edges_owned_by_none) > 0:
-        edge_owned_groups.insert(0, edges_owned_by_none)
-
-    # esmall = [(u, v) for (u, v, d) in G.edges(data=True) if d["owner"] ==]
     num_of_colors = len(edge_owned_groups)
+    edges_owned_by_none = [(u, v) for (u, v, d) in G.edges(data=True) if d["owner"] == None]
+    edge_owned_groups.insert(0, edges_owned_by_none)
+
     cm = plt.get_cmap('gist_rainbow')
     cNorm  = colors.Normalize(vmin=0, vmax=num_of_colors - 1)
     scalarMap = mplcm.ScalarMappable(norm=cNorm, cmap=cm)
     colors_list = [scalarMap.to_rgba(i) for i in range(num_of_colors)]
     colors_list.insert(0, (0.1, 0.1, 0.1, 1))
-    node_color_list = [colors_list[st.owner + 1 if st.owner is not None else 0] for st in star_map.stars]
+    node_color_list = [colors_list[d["owner"] + 1] for (n, d) in G.nodes(data=True)]
+
+    
 
 
     # nodes
@@ -56,8 +54,8 @@ def visualize_graph(star_map: StarMap, pos=None):
     # nx.draw_networkx_edges(
     #     G, pos, edgelist=esmall, width=1, alpha=0.5, edge_color="b", style="dashed"
     # )
+
     for index, edges_owned in enumerate(edge_owned_groups):
-        print(index)
         nx.draw_networkx_edges(G, pos, edgelist=edges_owned, width=1, edge_color=colors_list[index])
     
 
