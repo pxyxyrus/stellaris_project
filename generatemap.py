@@ -3,7 +3,7 @@ import subprocess
 from pathlib import Path
 import numpy as np
 from saveloadmap import MAPS_DIRECTORY, save_map 
-from visualize import visualize_graph
+from visualize import visualize_starmap
 
 
 MIN_EDGE_WEIGHT = 1
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     map_name = input("type in a name for the map\n")
     star_map = SquareStarMap(10)
     generate_map(map_name, star_map)
-    visualize_graph(star_map, star_map.get_star_position())
+    visualize_starmap(star_map, star_map.get_star_position())
 
 
 
