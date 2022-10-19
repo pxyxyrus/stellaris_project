@@ -8,9 +8,15 @@ class StarPath:
         self.owner = None # either None or number >= 0
         
 
-    def update(self, stars: list[Star], weight):
+    def update(self, stars: list[Star], distance):
         if stars is not None:
             self.stars = stars
-        if weight is not None:
-            self.weight = weight
+        if distance is not None:
+            self.distance = distance
+
+    def __lt__(self, other) -> bool:
+        return self.distance < other.distance
+
+    def __le__(self, other):
+        return self.distance <= other.distance
 

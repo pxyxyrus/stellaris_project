@@ -49,9 +49,9 @@ if __name__ == "__main__":
                 return ridx
             
         
-    
-    agents.append(StupidAgent(star_map, random_star_index()))
-    agents.append(StupidAgent(star_map, random_star_index()))
+    agents.append(GreedyAgent(star_map, random_star_index()))
+    # agents.append(StupidAgent(star_map, random_star_index()))
+    # agents.append(StupidAgent(star_map, random_star_index()))
     # agents.append(StupidAgent(star_map, random_star_index()))
 
     game_folder = ""
@@ -63,7 +63,6 @@ if __name__ == "__main__":
             save_map(star_map, "{}/{}".format(path_name, game_folder), "start")
             break
         i += 1
-
 
 
     start_game(agents, star_map)

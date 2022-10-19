@@ -1,5 +1,6 @@
+from typing import Tuple
 from stars import * 
-
+import heapq
 
 class Agent:
 
@@ -9,13 +10,10 @@ class Agent:
         self.agent_number = Agent.NUM_OF_AGENTS
         Agent.NUM_OF_AGENTS += 1
 
-        self.current_edge = None
         self.star_map = star_map
         self.visited = [False for _ in range(0, star_map.number_of_stars())]
-        self.star_map.stars[starting_star_index].owner = self.agent_number
-        self.visited[starting_star_index] = True
-        self.current_edge_progress = 0
-        self.next_star_index = None
+        self.next_star_index = starting_star_index
+        self._arrived()
 
 
     def play(self):
@@ -34,13 +32,17 @@ class Agent:
         else:
             self.current_edge_progress += 1
             if self.current_edge.distance <= self.current_edge_progress:
-                self.visited[self.next_star_index] = True
-                self.star_map.stars[self.next_star_index].owner = self.agent_number
-                self.current_edge_progress = 0
-                self.current_edge = None
-                self.next_star_index = None
+                self._arrived()
                 return True
         return False
+
+    def _arrived(self):
+        if self.star_map.stars[self.next_star_index].owner is None:
+            self.star_map.stars[self.next_star_index].owner = self.agent_number
+            self.visited[self.next_star_index] = True
+        self.current_edge_progress = 0
+        self.current_edge = None
+        self.next_star_index = None
 
     def get_next_edge(self) -> starpath.StarPath:
         # implement an algorithm that decides which edge to take next
@@ -68,10 +70,35 @@ class StupidAgent(Agent):
 class GreedyAgent(Agent):
 
     def __init__(self, star_map: starmap.StarMap, starting_star: int):
+        self._heap = []
+        self._heap
         super().__init__(star_map, starting_star)
 
+
     def get_next_edge(self) -> starpath.StarPath:
-        pass
+        if len(self._heap) != 0:
+            while len(self._heap) != 0:
+                _, edge = self._pop()
+                idx1, idx2 = edge.stars[0].index, edge.stars[1].index
+                other_star = self.star_map.stars[idx1 if self.visited[idx2] else idx2]
+                if edge.owner is None and other_star.owner is None:
+                    return edge
+        return None
+
+    def _arrived(self):
+        for connected_star_index in self.star_map.star_path_dict[self.next_star_index]:
+            edge = self.star_map.star_path_dict[self.next_star_index][connected_star_index]
+            if edge.owner is None and self.star_map.stars[connected_star_index].owner is None:
+                self._push(edge)
+        super()._arrived()
+
+
+    def _push(self, edge: starpath.StarPath):
+        heapq.heappush(self._heap, (edge.distance, edge))
+
+    def _pop(self) -> Tuple[int, starpath.StarPath]:
+        return heapq.heappop(self._heap)
+
     
         
 
