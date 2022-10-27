@@ -60,7 +60,7 @@ def generate_map(map_name: str, star_map: StarMap):
 if __name__ == "__main__":
     # passes in number of vertices for the sqaure shape map
     map_name = input("type in a name for the map\n")
-    star_map = SquareStarMap(10)
+    star_map = SquareStarMap(25)
     generate_map(map_name, star_map)
     visualize_starmap(star_map, star_map.get_star_position())
 
