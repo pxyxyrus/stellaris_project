@@ -12,7 +12,7 @@ An simplified simulation of the game stellaris.
 
 ### improvements
 - [ ] Get rid of adjacency matrix and possibly replace it with adjacency list
-- [ ] More maps with different vertex arrangement, specifically that looks like a stellaris map
+- [X] More maps with different vertex arrangement, specifically that looks like a stellaris map
 - [ ] Better documentation
 
 

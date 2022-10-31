@@ -1,7 +1,6 @@
 from .star import *
 from .starpath import *
 import numpy as np
-import networkx as nx
 
 class StarMap:
 
@@ -56,4 +55,37 @@ class SquareStarMap(StarMap):
                 stars.append(star)
                 cnt += 1
         super().__init__(stars)
-    
+
+
+
+class SpiralStarMap(StarMap):
+
+    # n points with spiral like
+    # every points generated pi/4
+    def __init__(self, n):
+        # r = a + b / pi * (theta ** (1 / c))
+        # spiral increases by 2b every cycle(= 2pi)
+        theta_steps = np.pi/8
+        theta_start = np.pi/2
+        theta_end = theta_start + n * theta_steps
+        a, b, c = 25, 2, 1
+
+        angles = np.arange(start=theta_start, stop = theta_end, step=theta_steps)
+        # angles = np.arange(start=theta_start, stop = theta_end, step=theta_steps)
+        
+        for index, theta in enumerate(angles):
+            if index == 0:
+                continue
+            if np.random.randint(0, 10) != 0:
+                angles[index] = theta + np.pi/np.random.randint(9, 16)
+
+
+        stars = []
+        for index, theta in enumerate(angles):
+            r = a + b / np.pi * (theta ** (1 / c))
+            x = r * np.cos(theta)
+            y = r * np.sin(theta)
+            stars.append(Star(x, y, index))
+
+        super().__init__(stars)
+

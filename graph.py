@@ -23,10 +23,6 @@ def create_graph(star_map: StarMap) -> Tuple[nx.Graph, List[int]]:
 
 
 
-def create_spanning_tree(G: nx.Graph) -> nx.Graph:
-    return nx.random_spanning_tree(G)
-
-
 
 
 
