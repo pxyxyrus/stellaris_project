@@ -1,4 +1,3 @@
-from cmath import inf
 from saveloadmap import MAPS_DIRECTORY, load_map
 from agents.agent import *
 from saveloadmap import save_map

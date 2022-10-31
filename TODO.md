@@ -7,8 +7,9 @@ An simplified simulation of the game stellaris.
 - [x] saving, loading maps
 - [x] visualizing maps
 - [X] implement agent that uses dijkstra's algorithm
-- [] test agent that uses dijkstra's algorithm
-- [] generate few hundred maps and create statistic of nodes taken(histograms, mean, median....)
+- [X] test agent that uses dijkstra's algorithm
+- [X] generate few hundred maps
+- [] create statistic of nodes taken from few hundred maps(histograms, mean, median....)
 
 ### improvements
 - [ ] Get rid of adjacency matrix and possibly replace it with adjacency list

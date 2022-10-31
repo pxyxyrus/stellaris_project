@@ -79,18 +79,19 @@ def generate_map(map_name: str, star_map: StarMap):
     
 
 if __name__ == "__main__":
-    # passes in number of vertices for the sqaure shape map
-    map_name = input("type in a name for the map\n")
-    number_of_stars = int(input("type in the number of stars for this map"))
-    if number_of_stars > 16:
-        star_map = SpiralStarMap(number_of_stars)
-        generate_map(map_name, star_map)
-        visualize_starmap(star_map, star_map.get_star_position())
-    else:
-        print("number of stars has to be greater than 16")
+    # map_name = input("type in a name for the map\n")
+    # number_of_stars = int(input("type in the number of stars for this map"))
+    # if number_of_stars > 16:
+    #     star_map = SpiralStarMap(number_of_stars)
+    #     generate_map(map_name, star_map)
+    #     visualize_starmap(star_map, star_map.get_star_position())
+    # else:
+    #     print("number of stars has to be greater than 16")
 
-
-
-
-
-        
+    cnt = 1
+    # tiny small medium large huge
+    for i in [200, 400, 600, 800, 1000]:
+        for _ in range(0, 200):
+            star_map = SpiralStarMap(i)
+            generate_map("map{}".format(cnt), star_map)
+            cnt += 1
