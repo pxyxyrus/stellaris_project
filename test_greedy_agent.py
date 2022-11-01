@@ -7,6 +7,8 @@ from game import start_game
 from graph import create_graph
 
 
+
+# checks greedy agent's sum of edge weight is equal to the sum of edge weight of the minimum spanning tree.
 def test_greedy_at_map(star_map):
     agents = []
 
