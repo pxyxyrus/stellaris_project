@@ -61,9 +61,9 @@ class Agent:
 # Default Agent
 class StupidAgent(Agent):
 
-    def __init__(self, star_map: starmap.StarMap, starting_star_index: int):
+    def __init__(self, star_map: starmap.StarMap, starting_star_index: int, agent_number: int):
         self.visited_star_list = []
-        super().__init__(star_map, starting_star_index) 
+        super().__init__(star_map, starting_star_index, agent_number) 
 
     def get_next_edge(self) -> starpath.StarPath:
         for i in self.visited_star_list:
@@ -82,9 +82,9 @@ class StupidAgent(Agent):
 # Our Agent using dijkstra's Algorithm
 class GreedyAgent(Agent):
 
-    def __init__(self, star_map: starmap.StarMap, starting_star: int):
+    def __init__(self, star_map: starmap.StarMap, starting_star: int, agent_number: int):
         self._heap = []
-        super().__init__(star_map, starting_star)
+        super().__init__(star_map, starting_star, agent_number)
 
 
     def get_next_edge(self) -> starpath.StarPath:
