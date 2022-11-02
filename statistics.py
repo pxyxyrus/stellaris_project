@@ -49,6 +49,7 @@ if __name__ == "__main__":
 
         save_map(star_map, "{}/{}".format(path_name, game_folder), "result")
         with open("{}/{}/{}".format(path_name, game_folder, "statistics.csv"), "w") as f:
+            f.write("{}, {}\n".format("agent_type", "nodes_taken"))
             for agent in agents:
                 cnt = 0
                 for st in star_map.stars:
