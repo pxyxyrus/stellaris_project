@@ -29,8 +29,8 @@ if __name__ == "__main__":
                     return ridx
                 
             
-        agents.append(GreedyAgent(star_map, random_star_index()))
-        agents.append(StupidAgent(star_map, random_star_index()))
+        agents.append(GreedyAgent(star_map, random_star_index(), len(agents)))
+        agents.append(StupidAgent(star_map, random_star_index(), len(agents)))
         # agents.append(StupidAgent(star_map, random_star_index()))
         # agents.append(StupidAgent(star_map, random_star_index()))
 

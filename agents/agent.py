@@ -2,13 +2,10 @@ from typing import Tuple
 from stars import * 
 import heapq
 
-class Agent:
+class Agent: 
 
-    NUM_OF_AGENTS = 0    
-
-    def __init__(self,star_map: starmap.StarMap, starting_star_index: int):
-        self.agent_number = Agent.NUM_OF_AGENTS
-        Agent.NUM_OF_AGENTS += 1
+    def __init__(self,star_map: starmap.StarMap, starting_star_index: int, agent_number: int):
+        self.agent_number = agent_number
 
         self.star_map = star_map
         self.visited = [False for _ in range(0, star_map.number_of_stars())]
