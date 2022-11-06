@@ -40,10 +40,13 @@ make
 
 ```bash
 python generatemap.py
-type in a name for the map
-map1
 ```
-This will create a bunch of files in the `./maps/map1` directory
+This will create a 1000 random maps.
+maps 1~200 will have 200 nodes
+maps 201~400 will have 400 nodes
+maps 401~600 will have 600 nodes
+maps 601~800 will have 800 nodes
+maps 801~1000 will have 1000 nodes
 
 
 
@@ -76,3 +79,9 @@ result
 ```
 Result
 ![SampleImage2](./images/sample_image_2.png)
+
+
+```bash
+python statistics.py
+```
+This will create statistics for agents on randomly generated 1000 maps.
