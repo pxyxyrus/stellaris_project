@@ -12,13 +12,13 @@ from graph import create_graph
     
 
 
-def visualize_starmap(star_map: StarMap, pos=None):
+def visualize_starmap(star_map: StarMap, pos=None, block_thread=False):
     G, owners = create_graph(star_map)
-    visualize_graph(G, owners, pos)
+    visualize_graph(G, owners, pos, block_thread)
 
 
 
-def visualize_graph(G, owners, pos=None):
+def visualize_graph(G, owners, pos=None, block_thread=False):
  # it might not work since there is not guarantee that the adjacency matrix is a planar graph
     if pos is None:
         pos = nx.planar_layout(G)
@@ -67,7 +67,9 @@ def visualize_graph(G, owners, pos=None):
     ax.margins(0.08)
     plt.axis("off")
     plt.tight_layout()
-    plt.show()
+    plt.show(block=block_thread)
+    plt.pause(0.00000001)
+    plt.clf()
 
 
 
@@ -77,5 +79,5 @@ if __name__ == "__main__":
     map_name = input("type in the map name\n")
     star_map = load_map(map_dir, map_name)
 
-    visualize_starmap(star_map, star_map.get_star_position())
+    visualize_starmap(star_map, star_map.get_star_position(), True)
 

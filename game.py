@@ -4,6 +4,8 @@ from saveloadmap import save_map
 from stars import *
 import numpy as np
 from pathlib import Path
+from visualize import visualize_starmap
+import time
 
 
 # Basic idea 
@@ -25,6 +27,10 @@ def start_game(agents: list[Agent], star_map: StarMap):
             result = ag.play()
             if star_map.is_all_stars_owned():
                 break
+            if result:
+                visualize_starmap(star_map, star_map.get_star_position())
+                time.sleep(0.05)
+    visualize_starmap(star_map, star_map.get_star_position(), True)
     print("End!")
 
 
@@ -48,7 +54,7 @@ if __name__ == "__main__":
                 return ridx
 
     agents.append(GreedyAgent(star_map, random_star_index(), len(agents)))
-    # agents.append(StupidAgent(star_map, random_star_index(), len(agents)))
+    agents.append(StupidAgent(star_map, random_star_index(), len(agents)))
     # agents.append(StupidAgent(star_map, random_star_index(), len(agents)))
     # agents.append(StupidAgent(star_map, random_star_index(), len(agents)))
 
