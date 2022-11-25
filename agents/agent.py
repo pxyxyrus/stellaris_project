@@ -1,4 +1,6 @@
 from typing import Tuple
+from enum import Enum
+import numpy as np
 from stars import * 
 import heapq
 
@@ -88,15 +90,15 @@ class StupidAgent(Agent):
 # Agent using dijkstra's Algorithm
 class GreedyAgent(Agent):
 
-    def __init__(self, star_map: starmap.StarMap, starting_star: int, agent_number: int):
+    def __init__(self, star_map: starmap.StarMap, starting_star_index: int, agent_number: int):
         self._heap = []
-        super().__init__(star_map, starting_star, agent_number)
+        super().__init__(star_map, starting_star_index, agent_number)
 
 
     def get_next_edge(self) -> starpath.StarPath:
         if len(self._heap) != 0:
             while len(self._heap) != 0:
-                _, edge = self._pop()
+                edge = self._pop()
                 idx1, idx2 = edge.stars[0].index, edge.stars[1].index
                 other_star = self.star_map.stars[idx1 if self.visited[idx2] else idx2]
                 if edge.owner is None and other_star.owner is None:
@@ -112,11 +114,10 @@ class GreedyAgent(Agent):
 
 
     def _push(self, edge: starpath.StarPath):
-        heapq.heappush(self._heap, (edge.distance, edge))
+        heapq.heappush(self._heap, edge)
 
     def _pop(self) -> Tuple[int, starpath.StarPath]:
         return heapq.heappop(self._heap)
 
     
         
-
