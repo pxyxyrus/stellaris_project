@@ -17,7 +17,7 @@ import time
 # 5. Stop when all of the stars are taken
 
 
-def start_game(agents: list[Agent], star_map: StarMap):
+def start_game(agents: list[Agent], star_map: StarMap, visualize=False):
     if len(agents) == 0:
         raise Exception("There is no agent to play the game.")
 
@@ -28,8 +28,9 @@ def start_game(agents: list[Agent], star_map: StarMap):
             if star_map.is_all_stars_owned():
                 break
             if result:
-                visualize_starmap(star_map, star_map.get_star_position())
-                time.sleep(0.05)
+                if visualize:
+                    visualize_starmap(star_map, star_map.get_star_position())
+                    time.sleep(0.05)
     visualize_starmap(star_map, star_map.get_star_position(), True)
     print("End!")
 
@@ -69,7 +70,7 @@ if __name__ == "__main__":
         i += 1
 
 
-    start_game(agents, star_map)
+    start_game(agents, star_map, True)
 
     save_map(star_map, "{}/{}".format(path_name, game_folder), "result")
 
