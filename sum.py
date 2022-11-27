@@ -1,3 +1,5 @@
+import numpy as np
+
 for j in [1, 201, 401, 601, 801]: 
     agent1_sum = 0
     agent2_sum = 0
@@ -17,8 +19,11 @@ for j in [1, 201, 401, 601, 801]:
             agent2_num = int(agent2_num)
             agent1_sum += int(agent1_num)
             agent2_sum += int(agent2_num)
-            if agent1_num < agent2_num:
-                print(map_name)
+            
+            if agent1_num * 2 < agent2_num or agent2_num * 2 < agent1_num:
+                print(map_name, agent1_num - agent2_num)
+            # if agent1_num < agent2_num:
+                # print(map_name, agent2_num - agent1_num)
 
 
   

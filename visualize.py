@@ -35,17 +35,18 @@ def visualize_graph(G, owners, pos=None, block_thread=False):
     edges_owned_by_none = [(u, v) for (u, v, d) in G.edges(data=True) if d["owner"] == None]
     edge_owned_groups.insert(0, edges_owned_by_none)
 
-    cm = plt.get_cmap('gist_rainbow')
-    cNorm  = colors.Normalize(vmin=0, vmax=num_of_colors - 1)
-    scalarMap = mplcm.ScalarMappable(norm=cNorm, cmap=cm)
-    colors_list = [scalarMap.to_rgba(i) for i in range(num_of_colors)]
+    # cm = plt.get_cmap('gist_rainbow')
+    # cNorm  = colors.Normalize(vmin=0, vmax=num_of_colors - 1)
+    # scalarMap = mplcm.ScalarMappable(norm=cNorm, cmap=cm)
+    # colors_list = [scalarMap.to_rgba(i) for i in range(num_of_colors)]
+    colors_list = ["b", "g", "r", "c", "m", "y"]
 
     # Color None (black) is always the first
     colors_list.insert(0, (0.1, 0.1, 0.1, 1))
     node_color_list = [colors_list[d["owner"] + 1] if d["owner"] is not None else (0, 0, 0, 1) for (n, d) in G.nodes(data=True)]
 
     # nodes
-    nx.draw_networkx_nodes(G, pos, node_color=node_color_list, node_size=250)
+    nx.draw_networkx_nodes(G, pos, node_color=node_color_list, node_size=25)
 
     # edges
     # nx.draw_networkx_edges(G, pos, edgelist=elarge, width=1)
@@ -58,10 +59,10 @@ def visualize_graph(G, owners, pos=None, block_thread=False):
     
 
     # node labels
-    nx.draw_networkx_labels(G, pos, font_size=12, font_family="sans-serif", font_color='w')
+    # nx.draw_networkx_labels(G, pos, font_size=12, font_family="sans-serif", font_color='w')
     # edge weight labels
     edge_labels = nx.get_edge_attributes(G, "weight")
-    nx.draw_networkx_edge_labels(G, pos, edge_labels)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels, font_size = 10, font_family = 'sans-serif')
 
     ax = plt.gca()
     ax.margins(0.08)
