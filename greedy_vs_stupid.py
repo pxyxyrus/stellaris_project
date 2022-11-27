@@ -1,7 +1,6 @@
-from saveloadmap import MAPS_DIRECTORY, load_map
-from agents.agent import *
-from saveloadmap import save_map
-from stars import *
+from lib.file.saveloadmap import MAPS_DIRECTORY, load_map, save_map
+from lib.agents.agent import *
+from lib.stars import *
 import numpy as np
 from pathlib import Path
 from game import start_game

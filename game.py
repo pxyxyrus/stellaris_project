@@ -1,7 +1,7 @@
-from saveloadmap import MAPS_DIRECTORY, load_map
-from agents.agent import *
-from saveloadmap import save_map
-from stars import *
+from lib.file.saveloadmap import MAPS_DIRECTORY, load_map
+from lib.agents.agent import *
+from lib.file.saveloadmap import save_map
+from lib.stars import *
 import numpy as np
 from pathlib import Path
 from visualize import visualize_starmap
@@ -31,7 +31,9 @@ def start_game(agents: list[Agent], star_map: StarMap, visualize=False):
                 if visualize:
                     visualize_starmap(star_map, star_map.get_star_position())
                     time.sleep(0.05)
-    visualize_starmap(star_map, star_map.get_star_position(), True)
+    
+    if visualize:
+        visualize_starmap(star_map, star_map.get_star_position(), True)
     print("End!")
 
 

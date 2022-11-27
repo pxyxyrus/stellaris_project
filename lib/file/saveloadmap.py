@@ -1,5 +1,5 @@
-from stars.star import * 
-from stars.starmap import *
+from lib.stars.star import * 
+from lib.stars.starmap import *
 # from pathlib import Path
 
 

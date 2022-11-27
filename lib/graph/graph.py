@@ -1,6 +1,6 @@
 from typing import List, Tuple
 import networkx as nx
-from stars import StarMap
+from lib.stars import StarMap
 
 
 

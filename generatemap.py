@@ -1,10 +1,10 @@
 from typing import final
-from stars import *
+from lib.stars import *
 import subprocess
 import numpy as np
 import networkx as nx
 from pathlib import Path
-from saveloadmap import MAPS_DIRECTORY, save_map 
+from lib.file.saveloadmap import MAPS_DIRECTORY, save_map 
 from visualize import visualize_starmap
 
 

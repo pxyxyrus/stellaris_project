@@ -1,8 +1,8 @@
-from stars import *
+from lib.stars import *
 import subprocess
 from pathlib import Path
 import numpy as np
-from saveloadmap import MAPS_DIRECTORY, save_map 
+from lib.file.saveloadmap import MAPS_DIRECTORY, save_map 
 from visualize import visualize_starmap
 
 

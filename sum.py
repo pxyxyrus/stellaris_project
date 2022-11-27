@@ -1,32 +1,33 @@
-
-
-
-
-
 for j in [1, 201, 401, 601, 801]: 
-    greedy_sum = 0
-    default_sum = 0
+    agent1_sum = 0
+    agent2_sum = 0
 
     for i in range(j, j + 200):
         map_name = "map{}".format(i)
 
 
-        with open( "./maps/{}/game1/statistics.csv".format(map_name), "r") as f:
-            f.readline()
+        with open( "./maps/{}/game3/statistics.csv".format(map_name), "r") as f:
+            agent=f.readline()
             line = f.readline()
-            _, greedy_num = line.split(',')
+            agent1_name, agent1_num = line.split(',')
             line = f.readline()
-            _, default_num = line.split(',')
-            print(greedy_num, default_num)
+            agent2_name, agent2_num = line.split(',')
 
-            greedy_sum += int(greedy_num)
-            default_sum += int(default_num)
+            agent1_num = int(agent1_num)
+            agent2_num = int(agent2_num)
+            agent1_sum += int(agent1_num)
+            agent2_sum += int(agent2_num)
+            if agent1_num < agent2_num:
+                print(map_name)
 
-    print(greedy_sum)  
-    print(default_sum)
 
-    print(greedy_sum / 200)
-    print(default_sum / 200)
+  
+
+    print(agent1_name)
+    print(agent1_sum / 200)
+    print(agent2_name)
+    print(agent2_sum / 200)
+    print()
 
 # 200 node maps average
 # 127.6 Greedy

@@ -2,9 +2,9 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.cm as mplcm
 import matplotlib.colors as colors
-from saveloadmap import load_map
-from stars.starmap import StarMap
-from graph import create_graph
+from lib.file.saveloadmap import load_map
+from lib.stars.starmap import StarMap
+from lib.graph.graph import create_graph
 
 
 

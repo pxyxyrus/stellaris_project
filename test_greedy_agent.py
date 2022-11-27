@@ -1,10 +1,10 @@
-from saveloadmap import MAPS_DIRECTORY, load_map
-from agents.agent import *
-from stars import *
+from lib.file.saveloadmap import MAPS_DIRECTORY, load_map
+from lib.agents.agent import *
+from lib.stars import *
 import numpy as np
 import networkx as nx
 from game import start_game
-from graph import create_graph
+from lib.graph.graph import create_graph
 
 
 
