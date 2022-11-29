@@ -1,59 +1,60 @@
 import numpy as np
 
-for j in [1, 201, 401, 601, 801]: 
-    agent1_sum = 0
-    agent2_sum = 0
-
-    for i in range(j, j + 200):
-        map_name = "map{}".format(i)
 
 
-        with open( "./maps/{}/game3/statistics.csv".format(map_name), "r") as f:
-            agent=f.readline()
-            line = f.readline()
-            agent1_name, agent1_num = line.split(',')
-            line = f.readline()
-            agent2_name, agent2_num = line.split(',')
+stats = []
+for game in ['game1', 'game2', 'game3']:
+    if 'game1':
+        stats.append('Greedy vs Stupid\n')
+    elif 'game2':
+        stats.append('Slicing vs Stupid\n')
+    elif 'game3':
+        stats.append('Greedy vs Slicing\n')
+    stats.append('\n')
+    for j in [1, 201, 401, 601, 801]: 
+        agent1_sum = 0
+        agent2_sum = 0
 
-            agent1_num = int(agent1_num)
-            agent2_num = int(agent2_num)
-            agent1_sum += int(agent1_num)
-            agent2_sum += int(agent2_num)
-            
-            if agent1_num * 2 < agent2_num or agent2_num * 2 < agent1_num:
-                print(map_name, agent1_num - agent2_num)
-            # if agent1_num < agent2_num:
-                # print(map_name, agent2_num - agent1_num)
-
-
-  
-
-    print(agent1_name)
-    print(agent1_sum / 200)
-    print(agent2_name)
-    print(agent2_sum / 200)
-    print()
-
-# 200 node maps average
-# 127.6 Greedy
-# 72.4  Random
-
-# 400 node maps average
-# 261.495 Greedy
-# 138.505 Random
+        stats.append('Map Size {}\n'.format(j + 200))
+        max_gap = 0
+        max_gap_maps = []
+        
+        for i in range(j, j + 200):
+            map_name = "map{}".format(i)
 
 
-# 600
-# 395.42 Greedy
-# 204.58 Random
+            with open( "./maps/{}/{}/statistics.csv".format(map_name, game), "r") as f:
+                agent=f.readline()
+                line = f.readline()
+                agent1_name, agent1_num = line.split(',')
+                line = f.readline()
+                agent2_name, agent2_num = line.split(',')
 
-# 800
-# 530.16 Greedy
-# 269.84 Random
+                agent1_num = int(agent1_num)
+                agent2_num = int(agent2_num)
+                agent1_sum += agent1_num
+                agent2_sum += agent2_num
+                
+                gap = np.abs(agent1_num - agent2_num)
+                if max_gap < gap:
+                    max_gap = gap
+                    max_gap_maps = [map_name]
+                elif max_gap == gap:
+                    max_gap_maps.append(map_name)
+        
 
-# 1000
-# 664.42 Greedy
-# 335.58 Random
+    
+        stats.append("Summary\n")
+        stats.append("{} {}\n".format(agent1_name, agent1_sum / 200))
+        stats.append("{} {}\n".format(agent2_name, agent2_sum / 200))
+        stats.append("\n")
 
+        stats.append("Map(s) with biggest gap({})\n".format(max_gap))
+        for ll in  max_gap_maps:
+            stats.append("{} ".format(ll))  
+        stats.append("\n")
+
+with open( "./maps/stats.txt", "w") as f2:
+    f2.writelines(stats)
 
 
