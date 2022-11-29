@@ -4,11 +4,11 @@ import numpy as np
 
 stats = []
 for game in ['game1', 'game2', 'game3']:
-    if 'game1':
+    if game == 'game1':
         stats.append('Greedy vs Stupid\n')
-    elif 'game2':
+    elif game == 'game2':
         stats.append('Slicing vs Stupid\n')
-    elif 'game3':
+    elif game == 'game3':
         stats.append('Greedy vs Slicing\n')
     stats.append('\n')
     for j in [1, 201, 401, 601, 801]: 
