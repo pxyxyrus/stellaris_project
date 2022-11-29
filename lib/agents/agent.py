@@ -170,11 +170,53 @@ class SlicingAgent(Agent):
         heaplist = []
         if (self.slicing_direction == self.SlicingDirection.HORIZONTAL and self.starting_star.x > 0) or\
             (self.slicing_direction == self.SlicingDirection.VERTICAL and self.starting_star.y > 0):
-            heaplist = [self._heap1, self._heap2, self._heap3]
-        else:
-            heaplist = [self._heap2, self._heap1, self._heap3]
 
-        for heap in heaplist:
+            heap = self._heap1
+            while len(heap) != 0:
+                _, edge = self._pop(heap)
+                other_star = self.get_unvisited_star_from_edge(edge)
+                if edge.owner is None and other_star.owner is None:
+                    if (self.slicing_direction == self.SlicingDirection.HORIZONTAL and other_star.x >= self.max_star_coord) or \
+                        (self.slicing_direction == self.SlicingDirection.VERTICAL and other_star.y >= self.max_star_coord):
+                        return edge
+
+            heap = self._heap2
+            while len(heap) != 0:
+                _, edge = self._pop(heap)
+                other_star = self.get_unvisited_star_from_edge(edge)
+                if edge.owner is None and other_star.owner is None:
+                    if (self.slicing_direction == self.SlicingDirection.HORIZONTAL and other_star.x <= self.min_star_coord) or \
+                        (self.slicing_direction == self.SlicingDirection.VERTICAL and other_star.y <= self.min_star_coord):
+                        return edge
+
+            heap = self._heap3
+            while len(heap) != 0:
+                _, edge = self._pop(heap)
+                other_star = self.get_unvisited_star_from_edge(edge)
+                if edge.owner is None and other_star.owner is None:
+                    return edge
+
+
+        else:
+            heap = self._heap2
+            while len(heap) != 0:
+                _, edge = self._pop(heap)
+                other_star = self.get_unvisited_star_from_edge(edge)
+                if edge.owner is None and other_star.owner is None:
+                    if (self.slicing_direction == self.SlicingDirection.HORIZONTAL and other_star.x <= self.min_star_coord) or \
+                        (self.slicing_direction == self.SlicingDirection.VERTICAL and other_star.y <= self.min_star_coord):
+                        return edge
+
+            heap = self._heap1
+            while len(heap) != 0:
+                _, edge = self._pop(heap)
+                other_star = self.get_unvisited_star_from_edge(edge)
+                if edge.owner is None and other_star.owner is None:
+                    if (self.slicing_direction == self.SlicingDirection.HORIZONTAL and other_star.x >= self.max_star_coord) or \
+                        (self.slicing_direction == self.SlicingDirection.VERTICAL and other_star.y >= self.max_star_coord):
+                        return edge
+
+            heap = self._heap3
             while len(heap) != 0:
                 _, edge = self._pop(heap)
                 other_star = self.get_unvisited_star_from_edge(edge)
