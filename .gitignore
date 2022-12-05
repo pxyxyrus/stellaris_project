@@ -4,8 +4,10 @@
 **/generate_map2.py
 **/heap.py
 
-
 maps/**
+greedy_vs_slicing_maps
+greedy_vs_stupid_maps
+slicing_vs_stupid_maps
 
 # **/README.md
 triangle/triangle
