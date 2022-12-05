@@ -8,7 +8,7 @@ from lib.file.saveloadmap import MAPS_DIRECTORY, save_map
 from visualize import visualize_starmap
 
 
-MIN_EDGE_WEIGHT = 1
+MIN_EDGE_WEIGHT = 10
 MAX_EDGE_WEIGHT = 20
 
 def get_random_distance():
