@@ -4,11 +4,12 @@ channels:
   - defaults
 dependencies:
   - blas=1.0=mkl
+  - bottleneck=1.3.5=py310h4e76f89_0
   - brotli=1.0.9=hca72f7f_7
   - brotli-bin=1.0.9=hca72f7f_7
   - bzip2=1.0.8=h1de35cc_0
-  - ca-certificates=2022.07.19=hecd8cb5_0
-  - certifi=2022.9.14=py310hecd8cb5_0
+  - ca-certificates=2022.10.11=hecd8cb5_0
+  - certifi=2022.9.24=py310hecd8cb5_0
   - cycler=0.11.0=pyhd3eb1b0_0
   - fonttools=4.25.0=pyhd3eb1b0_0
   - freetype=2.11.0=hd8bbffd_0
@@ -44,16 +45,19 @@ dependencies:
   - munkres=1.1.4=py_0
   - ncurses=6.3=hca72f7f_3
   - networkx=2.8.4=py310hecd8cb5_0
+  - numexpr=2.8.4=py310h9638375_0
   - numpy=1.21.5=py310hdcd3fac_3
   - numpy-base=1.21.5=py310hfd2de13_3
-  - openssl=1.1.1q=hca72f7f_0
+  - openssl=1.1.1s=hca72f7f_0
   - packaging=21.3=pyhd3eb1b0_0
+  - pandas=1.5.1=py310h3ea8b11_0
   - pillow=9.2.0=py310hde71d04_1
   - pip=22.1.2=py310hecd8cb5_0
   - pyparsing=3.0.9=py310hecd8cb5_0
   - python=3.10.4=hdfd78df_0
   - python-dateutil=2.8.2=pyhd3eb1b0_0
   - python_abi=3.10=2_cp310
+  - pytz=2022.1=py310hecd8cb5_0
   - readline=8.1.2=hca72f7f_1
   - scipy=1.8.0=py310h47774c9_1
   - setuptools=63.4.1=py310hecd8cb5_0
@@ -66,3 +70,4 @@ dependencies:
   - xz=5.2.5=hca72f7f_1
   - zlib=1.2.12=h4dc903c_3
   - zstd=1.5.2=hcb37349_0
+
